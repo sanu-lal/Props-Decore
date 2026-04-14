@@ -3,7 +3,8 @@
 body{
 margin:0;
 padding-top:70px;
-font-family:Arial, Helvetica, sans-serif;
+font-family: 'Inter', sans-serif;
+background-color: #fafafa;
 }
 
 /* NAVBAR SEARCH */
@@ -11,18 +12,30 @@ font-family:Arial, Helvetica, sans-serif;
 .search-input{
 border-radius:30px 0 0 30px;
 border-right:none;
+border-color: #f1f1f1;
+background-color: #f9f9f9;
+transition: all 0.2s ease;
+}
+
+.search-input:focus {
+background-color: white;
+box-shadow: none;
+border-color: #ff4d6d;
 }
 
 .search-btn{
 border-radius:0 30px 30px 0;
 background:#ff4d6d;
 color:white;
-border:none;
-padding:6px 18px;
+border:1px solid #ff4d6d;
+padding:6px 24px;
+font-weight: 500;
+transition: all 0.2s ease;
 }
 
 .search-btn:hover{
 background:#e63950;
+border-color: #e63950;
 }
 
 /* CAROUSEL */
@@ -75,11 +88,11 @@ background:#f1efef;
 
 .category-card{
 background:white;
-border-radius:10px;
+border-radius:12px;
 overflow:hidden;
 text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-transition:0.3s;
+box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .category-card img{
@@ -94,8 +107,8 @@ font-weight:600;
 }
 
 .category-card:hover{
-transform:translateY(-8px);
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
+transform:translateY(-6px);
+box-shadow: 0 12px 24px rgba(0,0,0,0.1);
 }
 
 /* about*/
@@ -200,13 +213,14 @@ font-size:14px;
 background:white;
 border-radius:12px;
 overflow:hidden;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 position:relative;
-transition:0.3s;
+transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .product-card:hover{
-transform:translateY(-5px);
+transform:translateY(-6px);
+box-shadow: 0 12px 24px rgba(0,0,0,0.1);
 }
 
 .product-card img{
@@ -355,4 +369,24 @@ border:none;
 color:white;
 padding:12px 20px;
 border-radius:8px;
+}
+
+/* UI Upgrades */
+.product-img-hover:hover {
+    transform: scale(1.05);
+}
+
+.product-img-zoom:hover {
+    transform: scale(1.03);
+}
+
+#search-suggestions {
+    background-color: white;
+}
+#search-suggestions a {
+    transition: background-color 0.15s ease, padding-left 0.2s ease;
+}
+#search-suggestions a:hover {
+    background-color: #fcfcfc;
+    padding-left: 20px !important;
 }
