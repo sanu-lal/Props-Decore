@@ -1,0 +1,1 @@
+web: gunicorn props_decore.wsgi
