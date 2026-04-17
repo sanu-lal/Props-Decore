@@ -3,15 +3,16 @@ import os
 import dj_database_url
 import cloudinary
 from dotenv import load_dotenv
-import os
 
+# Load environment variables
 load_dotenv()
+
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = True
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv("DEBUG", "False") == "True"
 ALLOWED_HOSTS = ['*']
 
 # Cloudinary config
@@ -21,15 +22,16 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET"),
 )
 
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# Django 4+ storage system (FIXED)
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage. CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
+
 # Applications
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,16 +82,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'props_decore.wsgi.application'
 
-# Database (IMPORTANT FIX)
+# Database
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
 }
 
 # Static files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media
 MEDIA_URL = '/media/'
