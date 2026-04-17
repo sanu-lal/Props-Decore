@@ -2,7 +2,10 @@ from pathlib import Path
 import os
 import dj_database_url
 import cloudinary
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -18,8 +21,15 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET"),
 )
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage. CompressedManifestStaticFilesStorage",
+    },
+}
 # Applications
 INSTALLED_APPS = [
     'django.contrib.admin',
